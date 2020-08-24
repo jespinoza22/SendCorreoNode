@@ -1,5 +1,7 @@
 var express = require('express');
 var sendCorreo = require('./sendCorreo.js');
+// var cors = require('cors')
+var myParser = require("body-parser");
 
 //Load HTTP module
 const http = require("http");
@@ -7,12 +9,18 @@ const hostname = 'localhost';
 const port = 3000;
 
 var app = express();
+// app.use(cors())
+app.use(myParser.urlencoded({extended : true}));
 const server = http.createServer(app);
-app.use(express.json());
+// app.use(express.json());
 app.post('/sendCorreo', function (req, res) {
-    console.log(req.body);
+    res.setHeader('Access-Control-Allow-Origin', '*');
     sendCorreo.sendCorreo(req.body);
-    res.end(`Correo enviado correctamente`);
+    var resp = {
+      codigoRespuesta: "0",
+      mensajeRespuesta: "Correo enviado satisfactoriamente"
+    }
+    res.end(JSON.stringify(resp));
 });
 
 

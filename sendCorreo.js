@@ -6,12 +6,11 @@ var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: 'jespinoza2704@gmail.com',
-    pass: 'XXXX'
+    pass: 'XXXXX'
   }
 });
 
-exports.sendCorreo = function sendCorreo(body){
-
+exports.sendCorreo = async function sendCorreo(body){
     var html = `<strong>NOMBRES :</strong> ${body.nombres} <br>
                 <strong>APELLIDOS :</strong> ${body.apellidos} <br>
                 <strong>EMAIL :</strong> ${body.email} <br>
